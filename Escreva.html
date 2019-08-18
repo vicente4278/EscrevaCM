@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+	<title>Divirta-se Escrevendo!</title>
+	<link rel="icon" type="image/png" href="http://photos.gograph.com/thumbs/CSP/CSP992/k12762297.jpg">
+	<link rel="stylesheet" type="text/css" href="Escreva.css">
+</head>
+<body onload="setInterval('tempo();',1000)">
+	<div id="printprint">
+	</div>
+<div id="allallall">
+	<center>
+		<div id="title" class="camiFace">
+			<h1><b>Divirta-se escrevendo!</b></font><h1>
+		</div>
+		<div id="txtarea">
+			<p><b><input type="text" name="Title" id="tt" placeholder="Título" class="camiFace"></textarea></b></p>
+			<p><textarea name="Txt" id="dd" placeholder="Escreva suas histórias aqui!"></textarea></p>
+		</div>
+		<FORM NAME="Clear">
+		<input class="button" type="button" name="clear" value="Limpar Tudo" onClick="LimparTudo()">
+	</center>
+	<!-- Scripts -->
+	<script language="javascript">
+		function LimparTudo() {
+			var x;
+			var r = confirm("Você realmente deseja apagar todo o seu texto?")
+						
+			if (r == true) {
+				document.getElementById("tt").value = "";
+				document.getElementById("dd").value = "";
+			}
+		}
+		window.onbeforeunload = function(e) {
+			return "Se você sair ou atualizar esta página todo o texto será apagado!";
+		}
+	</script>
+	<div id="txtarea2">
+		<text>Autor(a): </text><input type="text" id="aut">
+		<text style="margin-left:15px" class="camiFace">Para(opcional): </text><input type="text" id="to">
+		<text style="margin-left:15px">Incluir data: </text><input type="checkbox" id="date">
+		<input style="margin-left:30px" type="button" class="button" value="Gerar Texto" onclick="exportTXT()">
+		<input type="button" class="button" value="Imprimir Texto" onclick="print()">
+		<script>
+			function exportTXT() {
+					var aut = document.getElementById("aut").value;
+					var to = document.getElementById("to").value;
+					var title = document.getElementById("tt").value;
+					var txt = document.getElementById("dd").value;
+					var getdate = document.getElementById("date").checked;
+					var finalTXT;
+					
+					if (aut != "") {
+						var finalAU;
+						finalAU =  "\n\nPor: " + aut + ".";
+					} else {
+						finalAU = "";
+					}
+					
+					if (to != "") {
+						var finalTO;
+						finalTO =  "\nPara: " + to + ".";
+					} else {
+						finalTO = "";
+					}
+					
+					if (getdate == true) {
+						var dat = new Date();
+						var day = dat.getDate();
+						var mon = dat.getMonth() +1;
+						var year = dat.getYear() -100;
+						var finalD;
+						
+						finalD = "\nEscrito em " + day + "/" + mon + "/" + year + ".";
+					} else {
+						finalD = "";
+					}
+					
+					finalTXT = "<br><textarea id=\"exportBOX\">" + title + finalAU + finalTO + finalD + "\n\n" + txt + "</textarea><input type=\"button\" class=\"button\" onClick=\"resetEXP()\" value=\"X\">";
+					printable = "<div><text class=\"printtitle\">" + title + "</text>" + "<br><br>" + finalAU + "<br>" + finalTO + "<br>" + finalD + "<br><br><text>" + txt + "</text></div>";
+					
+					document.getElementById("export").innerHTML = finalTXT;
+					document.getElementById("printprint").innerHTML = printable;
+			}
+			function resetEXP() {
+				document.getElementById("export").innerHTML = "";
+			}
+		</script>
+		<span id="export">
+		</span>
+	</div>
+	<div id="textarea3">
+		<text>Outros sites...</text><br><br>
+		<text>Escolha qual você quer ver:</text>
+		<select id="iframeSite" onchange="setSiteFrame()" onload="setSiteFrame()">
+			<option>Nenhum</option>
+			<option>Google Tradutor</option>
+			<option>Pastebin</option>
+		</select>
+		<span id="iframeFinal"></span>
+		<script>
+			function setSiteFrame() {
+			
+			var site = document.getElementById("iframeSite").value;
+			
+			if (site == "Nenhum") {
+				var iframe = "";
+			};
+			if (site == "Google Tradutor") {
+				var iframe = "<center><text>Esse site não permite ser incorporado em outros, então vá para o <a href=\"http://translate.google.com\" target=\"_blank\">Site Principal</a></text></center>";
+			};
+			if (site == "Pastebin") {
+				var iframe = "<center><iframe src=\"http://pastebin.com/\" width=\"80%\" height=\"1000\"></iframe></center>";
+			};
+			
+			document.getElementById("iframeFinal").innerHTML = iframe;
+			
+			}
+		</script>
+	</div>
+	<div class="end">
+		<p>Esta página foi criada por <b>Vicente Parmigiani</b>. Se você não estiver gostando de algo ou quer dar alguma dica, <a href="file:///E:/HTML%20PAGES/Form.html">clique aqui</a>.</p>
+		<br><span id="timeron"><text style="margin-right:20px">Alerta: você está nessa página há <span id="timer">0:00:00</span>.</text></span><input value="Ocultar Timer" type="button" onClick="viewn()" id="timerB"/>
+		<text>Modo de vizualização limpo:</text><span id="c1"><input type="checkbox" onchange="clean()" id="cleanB"></span>
+		<script>
+			function clean() {
+				var detect = document.getElementById("cleanB").checked;
+				if (detect == true) {
+					document.getElementsByClassName("end")[0].className = "endH";
+					document.getElementById("title").id = "titleH";
+					document.getElementById("txtarea").id = "txtareaCLEAN";
+					document.getElementById("c1").innerHTML = "";
+					document.getElementById("c2").innerHTML = "<text>Modo de vizualização limpo:</text><input type=\"checkbox\" onchange=\"clean()\" id=\"cleanB\" checked>";
+					document.getElementById("t1").innerHTML = "<text id=\"t12\">Divirta-se Escrevendo</text>";
+					document.getElementsByClassName("c2H")[0].className = "c2";
+					document.getElementsByClassName("t1H")[0].className = "t1";
+				} else {
+					document.getElementsByClassName("endH")[0].className = "end";
+					document.getElementById("titleH").id = "title";
+					document.getElementById("txtareaCLEAN").id = "txtarea";
+					document.getElementById("c1").innerHTML = "<input type=\"checkbox\" onchange=\"clean()\" id=\"cleanB\">";
+					document.getElementById("c2").innerHTML = "";
+					document.getElementById("t1").innerHTML = "";
+					document.getElementsByClassName("c2")[0].className = "c2H";
+					document.getElementsByClassName("t1")[0].className = "t1H";
+				}
+				
+				
+			}
+			
+			
+			var onoff = 1
+			
+			function viewn() {
+			onoff += 1
+			
+				if (onoff >= 2) {
+					onoff = 0
+					document.getElementById("timeron").innerHTML = ""
+					document.getElementById("timerB").value = "Exibir Timer"
+				} 
+				if (onoff == 1) {
+					onoff = 2
+					document.getElementById("timeron").innerHTML = "<text style=\"margin-right:20px\">Alerta: você está nessa página há <span id=\"timer\">0:00:00</span>.</text>"
+					document.getElementById("timerB").value = "Ocultar Timer"
+				}
+			}
+			
+			var segundo = 0
+			var minuto = 0
+			var hora = 0
+
+			function tempo()
+			{
+				if (segundo <= 58)
+				{
+					segundo++
+				} 
+				else if (segundo == 59 && minuto <= 59)
+				{
+					segundo = 0
+					minuto++
+				} 
+				if (minuto == 60)
+				{
+					minuto = 0
+					hora++
+				}
+				if (hora == 23)
+				{
+					hora = 0
+				}
+				
+				if(segundo < 10 && minuto < 10)
+				{
+					document.getElementById("timer").innerHTML = hora + ":0" + minuto + ":0" + segundo
+				}
+				else if(segundo > 9 && minuto < 10)
+				{
+					document.getElementById("timer").innerHTML = hora + ":0" + minuto + ":" + segundo
+				}
+				else if(segundo < 10 && minuto > 9)
+				{
+					document.getElementById("timer").innerHTML = hora + ":" + minuto + ":0" + segundo
+				}
+				else if(segundo > 10 && minuto > 10)
+				{
+					document.getElementById("timer").innerHTML = hora + ":" + minuto + ":" + segundo
+				}
+				
+				if (minuto == 30 && segundo == 0){
+					var r = confirm("Você já está escrevendo há 30 minutos. Não quer descansar um pouco?")
+				}
+				if (hora == 1 && minuto == 0 && segundo == 0){
+					var r = confirm("Você já está escrevendo há 1 hora! Não quer mesmo descansar um pouco?")
+				}
+				if (hora == 2 && minuto == 0 && segundo == 0){
+					alert("Você já está escrevendo há 2 horas! Esta página será fechada em 5 minutos, então salve seu texto e dê uma volta por aí.")
+				}
+				if (hora == 2 && minuto == 4 && segundo == 50){
+					alert("A página será fechada em 10 segundos")
+				}
+				if (hora == 2 && minuto >= 5){
+					window.close()
+				}
+				if (r == true) {
+					window.close()
+				}
+			}
+		</script>
+		<br><br><br><br>
+	</div>
+	<span id="c2" class="c2H"></span>
+	<span id="t1" class="t1H"></span>
+	</div>
+</body>
+</html>
